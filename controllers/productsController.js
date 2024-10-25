@@ -14,7 +14,7 @@ const createProduct = async (req, res) => {
         });
 
         await product.save();
-        res.status(201).json(messageClass(false, product, 'product successfuly created'));
+        res.status(200).json(messageClass(false, product, 'product successfuly created'));
     } catch (err) {
         res.status(400).json(messageClass(true, null, err.message));
     }
@@ -26,7 +26,7 @@ const getProducts = async (req, res) => {
         const products = await Product.find();
         res.json(messageClass(false, products, 'Products report successfuly created'));
     } catch (err) {
-        res.status(500).json(messageClass(true, null, err.message));
+        res.status(200).json(messageClass(true, null, err.message));
     }
 };
 
@@ -35,7 +35,7 @@ const getProductById = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) {
-            return res.status(404).json(messageClass(true, null, 'Product not found'));
+            return res.status(200).json(messageClass(true, null, 'Product not found'));
         }
         res.json(messageClass(false, product, 'Product report created successfuly'));
     } catch (err) {
@@ -59,7 +59,7 @@ const updateProduct = async (req, res) => {
         );
 
         if (!product) {
-            return res.status(404).json(messageClass(true, null, 'Product not found'));
+            return res.status(200).json(messageClass(true, null, 'Product not found'));
         }
 
         res.json(messageClass(false, product, 'product updated successfuly'));
@@ -73,7 +73,7 @@ const deleteProduct = async (req, res) => {
     try {
         const product = await Product.findByIdAndDelete(req.params.id);
         if (!product) {
-            return res.status(404).json(messageClass(true, null, 'Product not found'));
+            return res.status(200).json(messageClass(true, null, 'Product not found'));
         }
         res.json(messageClass(false, null, 'Product deleted'));
     } catch (err) {

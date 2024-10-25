@@ -12,7 +12,7 @@ const createUser = async (req, res) => {
 
     await user.save();
 
-    res.status(201).json(messageClass(false, user, 'User successfuly created'));
+    res.status(200).json(messageClass(false, user, 'User successfuly created'));
   } catch (err) {
     res.status(400).json(messageClass(true, null, err.message));
   }
@@ -31,7 +31,7 @@ const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (!user) {
-      return res.status(404).json(messageClass(true, null, 'User not found'));
+      return res.status(200).json(messageClass(true, null, 'User not found'));
     }
     res.json(messageClass(false, user, 'User report successfuly created'));
   } catch (err) {
@@ -48,7 +48,7 @@ const updateUser = async (req, res) => {
       { new: true }
     );
     if (!user) {
-      return res.status(404).json(messageClass(true, null, 'User not found'));
+      return res.status(200).json(messageClass(true, null, 'User not found'));
     }
     res.json(messageClass(false, user, 'User successfuly updated'));
   } catch (err) {
@@ -60,7 +60,7 @@ const deleteUser = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) {
-      return res.status(404).json(messageClass(true, null, 'User not found'));
+      return res.status(200).json(messageClass(true, null, 'User not found'));
     }
     res.json(messageClass(false, null, 'User deleted'));
   } catch (err) {

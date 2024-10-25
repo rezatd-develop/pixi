@@ -9,6 +9,14 @@ const app = express();
 
 app.use(express.json());
 
+const cors = require('cors');
+
+app.use(cors({
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
+}));
+
 app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
 

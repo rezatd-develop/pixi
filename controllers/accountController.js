@@ -12,7 +12,7 @@ const signUp = async (req, res) => {
     const user = new User({ firstName, lastName, phoneNumber, password, _id: id });
     await user.save();
 
-    res.status(201).json(messageClass(false, null, 'user successfuly created'));
+    res.status(200).json(messageClass(false, null, 'user successfuly created'));
   } catch (err) {
     res.status(400).json(messageClass(true, null, err.message));
   }
@@ -24,12 +24,12 @@ const signIn = async (req, res) => {
   try {
     const user = await User.findOne({ phoneNumber });
     if (!user) {
-      return res.status(400).json(messageClass(true, null, 'Invalid phone number'));
+      return res.status(200).json(messageClass(true, null, 'Invalid phone number'));
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json(messageClass(true, null, 'Invalid phone number or password'));
+      return res.status(200).json(messageClass(true, null, 'Invalid phone number or password'));
     }
 
     const token = jwt.sign({ id: user.id }, jwtConfig.jwtToken);
