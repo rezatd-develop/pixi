@@ -24,7 +24,7 @@ const signIn = async (req, res) => {
   try {
     const user = await User.findOne({ phoneNumber });
     if (!user) {
-      return res.status(200).json(messageClass(true, null, 'Invalid phone number'));
+      return res.status(200).json(messageClass(true, null, 'شماره موبایلی که وارد کرده‌اید، اشتباه است.'));
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -35,7 +35,7 @@ const signIn = async (req, res) => {
     const token = jwt.sign({ id: user.id }, jwtConfig.jwtToken);
 
     res.set('Authorization', `Bearer ${token}`);
-    return res.status(200).json(messageClass(false, { firstName: user.firstName, lastName: user.lastName }, 'Login successful'));
+    return res.status(200).json(messageClass(false, { firstName: user.firstName, lastName: user.lastName }, 'با موفقیت وارد شدید.'));
   } catch (error) {
     return res.status(500).json(messageClass(true, null, 'Server error'));
   }

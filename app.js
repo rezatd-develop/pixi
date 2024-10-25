@@ -15,7 +15,13 @@ app.use(cors({
   origin: '*', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'], 
   allowedHeaders: ['Content-Type', 'Authorization'], 
+  exposedHeaders: ['Authorization'],
 }));
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Expose-Headers', 'Authorization');
+  next();
+});
 
 app.use('/api/auth', authRouter);
 app.use('/api/products', productsRouter);
