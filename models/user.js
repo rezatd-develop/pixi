@@ -18,26 +18,26 @@ const userSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String,
-    required: [true, 'Phone number is required'],
-    unique: [true, 'Phone number is already in use'],
+    required: [true, 'پر کردن شماره تماس اجباری است.'],
+    unique: [true, 'شماره تماس در دیتابیس موجود است. لطفا از قسمت ورود، لاگین کنید.'],
     trim: true,
     validate: {
       validator: function (v) {
         return /^\+?[1-9]\d{1,14}$/.test(v);
       },
-      message: props => `${props.value} is not a valid phone number!`
+      message: props => `${props.value} فرمت شماره تماس صحیح نیست.!`
     }
   },
   password: {
     type: String,
-    required: [true, 'Password is required'],
-    minlength: [8, 'Password must be at least 8 characters long'],
+    required: [true, 'رمز اجباری است.'],
+    minlength: [8, 'رمز باید حداقل ۸ کاراکتر داشته باشد.'],
     validate: {
       validator: function (v) {
         // Ensure password contains at least one number, one letter, and one special character
         return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(v);
       },
-      message: 'Password must contain at least one letter, one number, and one special character'
+      message: 'پسورد باید شامل اعداد، ارقام و کارکتر های خاص مثل @ خاص باشد.'
     }
   }
 }, { timestamps: true });

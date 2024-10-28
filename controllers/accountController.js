@@ -12,9 +12,9 @@ const signUp = async (req, res) => {
     const user = new User({ firstName, lastName, phoneNumber, password, _id: id });
     await user.save();
 
-    res.status(200).json(messageClass(false, null, 'user successfuly created'));
+    res.status(200).json(messageClass(false, null, 'ثبت نام با موفقیت انجام شد. میتوانید وارد شوید'));
   } catch (err) {
-    res.status(400).json(messageClass(true, null, err.message));
+    res.status(200).json(messageClass(true, null, err.message));
   }
 };
 
@@ -29,7 +29,7 @@ const signIn = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(200).json(messageClass(true, null, 'Invalid phone number or password'));
+      return res.status(200).json(messageClass(true, null, 'شماره موبایل یا پسورد اشتباه است.'));
     }
 
     const token = jwt.sign({ id: user.id }, jwtConfig.jwtToken);
@@ -37,7 +37,7 @@ const signIn = async (req, res) => {
     res.set('Authorization', `Bearer ${token}`);
     return res.status(200).json(messageClass(false, { firstName: user.firstName, lastName: user.lastName }, 'با موفقیت وارد شدید.'));
   } catch (error) {
-    return res.status(500).json(messageClass(true, null, 'Server error'));
+    return res.status(200).json(messageClass(true, null, 'Server error'));
   }
 }
 
