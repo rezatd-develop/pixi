@@ -1,9 +1,9 @@
 const mainCategoryType = {
     dog: 1000,
     cat: 2000,
-    accessories: 3000,
-    nest: 4000,
-    healthAndCare: 5000
+    healthAndCare: 3000,
+    accessories: 4000,
+    nest: 5000,
 };
 
 const subCategories = {
@@ -17,9 +17,9 @@ const subCategories = {
     catEncouragement: 2003,
     catSupplementsAndMultivitamins: 2004,
 
-    accessories: 3001,
-    nest: 4001,
-    healthAndCare: 5001,
+    healthAndCare: 3001,
+    accessories: 4001,
+    nest: 5001,
 };
 
-module.exports = {mainCategoryType,subCategories}
+module.exports = { mainCategoryType, subCategories }
